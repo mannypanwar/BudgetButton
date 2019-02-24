@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <title>Personal Expenses</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+
+        }
+
+        body {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 100)), url('../budget button/img.jpg');
+            background-position: center;
+            background-size: cover;
+
+
+        }
+
+
+
+        h1 {
+            font-family: 'Lato', sans-serif;
+            color: #F0F8FF;
+        }
+
+        #button:hover {
+            background-color: #F0F8FF
+        }
+
+        #button:active {
+            background-color: #F0F8FF;
+            box-shadow: 0 5px rgb(1, 49, 86);
+            transform: translateY(4px);
+        }
+
+        #button {
+            border-radius: 9px;
+            margin: 10px;
+            cursor:pointer
+        }
+
+        #button:hover{ color: black }
+
+        input[type=number] {
+            padding: 5px;
+            border: 2px solid #ccc;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        input[type=number]:focus {
+            border-color: #333;
+        }
+
+        .horizontel {
+            list-style-type: none;
+            position: relative;
+
+            padding: 0;
+        }
+
+        #git:link {
+            color: #F0F8FF
+        }
+
+        
+
+        #git:visited {
+            color: #F0F8FF
+        }
+
+        #git:hover {
+            color: rgb(28, 77, 95);
+           
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <h1 id="headingtotal"></h1>
+    <input id="inputA" type="number"></input>
+    <button id="button">+</button>
+    <div class="social">
+        <ul class="horizontel">
+            <li class="git_social"><a id="git" href="" target="_blank"><i class="fab fa-github fa-3x"></i></a></li>
+        </ul>
+    </div>
+
+    <script>
+
+        const headingel = document.querySelector("#headingtotal");
+
+
+
+        let totalexpense = 0;
+
+        headingel.textContent = totalexpense;
+
+
+
+
+        function addexpense() {
+
+            const input = document.querySelector("#inputA");
+            const textamount = input.value;
+
+            const expense = parseInt(textamount, 10);
+
+            totalexpense = totalexpense + expense;
+            console.log({ totalexpense })
+
+            headingel.textContent = totalexpense;
+        }
+
+        const element = document.querySelector("#button");
+
+        element.addEventListener("click", addexpense, false);
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
