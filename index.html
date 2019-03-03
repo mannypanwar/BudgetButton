@@ -35,9 +35,6 @@
         background-position: center;
         background-size: cover;
         font-family: "Lato", sans-serif;
-      }
-
-      h1 {
         color: #f0f8ff;
       }
 
@@ -61,15 +58,16 @@
         color: black;
       }
 
-      input[type="number"] {
+      input[type="number"],
+      input[type="text"] {
         padding: 5px;
         border: 2px solid #ccc;
         -webkit-border-radius: 5px;
         border-radius: 5px;
+        text-align: center;
       }
-
-      input[type="number"]:focus {
-        border-color: #333;
+      #inputD {
+        margin-top: 4px;
       }
 
       .horizontel {
@@ -113,74 +111,73 @@
     </div>
 
     <script>
-
       const headingel = document.querySelector("#headingtotal");
 
-        const inputdescel = document.querySelector("#inputD");
+      const inputdescel = document.querySelector("#inputD");
 
-        const input = document.querySelector("#inputA");
+      const input = document.querySelector("#inputA");
 
-        const expenseTableEL = document.querySelector{ "#expenseTable"}
+      const expenseTableEL = document.querySelector("#expenseTable");
 
+      let totalexpense = 0;
 
+      headingel.textContent = totalexpense;
 
+      const allexpenses = [];
 
+      function addexpense() {
+        const expenseitem = {};
 
-        let totalexpense = 0;
+        const textamount = input.value;
 
-        headingel.textContent = totalexpense;
+        const textdesc = inputdescel.value;
+        console.log({ textdesc, textamount });
 
-        const allexpenses = [];
+        const expense = parseInt(textamount, 10);
 
+        expenseitem.desc = textdesc;
+        expenseitem.amount = expense;
 
+        allexpenses.push(expenseitem);
 
+        totalexpense = totalexpense + expense;
 
-        function addexpense() {
+        const sometext = `Total : ${totalexpense}`;
 
-            const expenseitem = {};
+        headingel.textContent = sometext;
 
+        // const data1 = allexpenses[0];
+        // const data2 = allexpenses[1];
 
-            const textamount = input.value;
+        // const data1Text = ` ${data1.amount} :: Desc : ${data1.desc}`;
+        // const data2Text = ` ${data2.amount} :: Desc : ${data2.desc}`;
 
+        // const tableText = `
+        // <div>${data1Text}</div>
+        // <div>${data2Text}</div>
+        // `;
 
-
-            const textdesc = inputdescel.value;
-            console.log({ textdesc, textamount })
-
-            const expense = parseInt(textamount, 10);
-
-            expenseitem.desc = textdesc;
-            expenseitem.amount = expense;
-
-
-            allexpenses.push(expenseitem);
-
-
-
-            totalexpense = totalexpense + expense;
-
-            const sometext = `the expense for this month is`: $(totalExpense)
-
-            headingel.textContent = sometext;
-        }
-
-        const element = document.querySelector("#button");
-
-        element.addEventListener("click", addexpense, false);
-
-
-
-
-
-
-
-
-        swal({
-            title: "Welcome",
-            text: "This tool is built using VanillaJS",
-            icon: "success",
-            button: "Let's go",
+        const allExpenseHTML = allexpenses.map(expense => {
+          return `<div> ${expense.amount} :: ${expense.desc} </div>`;
         });
+
+        const joinedALLExpenseHTML = allExpenseHTML.join("");
+
+        console.log(joinedALLExpenseHTML);
+
+        expenseTableEL.innerHTML = joinedALLExpenseHTML;
+      }
+
+      const element = document.querySelector("#button");
+
+      element.addEventListener("click", addexpense, false);
+
+      swal({
+        title: "Welcome",
+        text: "This tool is built using VanillaJS",
+        icon: "success",
+        button: "Let's go"
+      });
     </script>
   </body>
 </html>
