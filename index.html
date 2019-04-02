@@ -15,166 +15,174 @@
       integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"
+      integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <style>
-      body {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
-
-      body {
-        background: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0),
-            rgba(0, 0, 0, 100)
-          ),
-          url("../img.jpg");
-        background-position: center;
-        background-size: cover;
-        font-family: "Lato", sans-serif;
-        color: #f0f8ff;
-      }
-
-      #button:hover {
-        background-color: #f0f8ff;
-      }
-
-      #button:active {
-        background-color: #f0f8ff;
-        box-shadow: 0 5px rgb(1, 49, 86);
-        transform: translateY(4px);
-      }
-
-      #button {
-        border-radius: 9px;
-        margin: 10px;
-        cursor: pointer;
-      }
-
-      #button:hover {
-        color: black;
-      }
-
-      input[type="number"],
-      input[type="text"] {
-        padding: 5px;
-        border: 2px solid #ccc;
-        -webkit-border-radius: 5px;
-        border-radius: 5px;
-        text-align: center;
-      }
-      #inputD {
-        margin-top: 4px;
-      }
-
-      .horizontel {
-        list-style-type: none;
-        position: relative;
-
-        padding: 0;
-      }
-
-      #git:link {
-        color: #f0f8ff;
-      }
-
-      #git:visited {
-        color: #f0f8ff;
-      }
-
-      #git:hover {
-        color: rgb(28, 77, 95);
-      }
-    </style>
   </head>
 
   <body>
-    <h1 id="headingtotal"></h1>
-    <input id="inputA" type="number" />
-    <input id="inputD" type="text" />
-    <button id="button">+</button>
-    <div id="expenseTable"></div>
-    <div class="social">
-      <ul class="horizontel">
-        <li class="git_social">
-          <a
-            id="git"
-            href="https://github.com/mannypanwar/BudgetButton"
-            target="_blank"
-            ><i class="fab fa-github fa-3x"></i
-          ></a>
-        </li>
-      </ul>
+    <nav class="navbar navbar-dark bg-dark">
+      <span class="navbar-brand mb-0 h1">Xpers</span>
+      <span class="navbar-brand mb-0 h1" id="headingtotal"></span>
+    </nav>
+
+    <div class="container-fluid bg-light" style="min-height: 100vh">
+      <div class="container">
+        <div class="jumbotron mt-4">
+          <div class="input-group mb-3">
+            <input
+              id="inputAmount"
+              type="number"
+              class="form-control"
+              placeholder="Amount spent"
+              aria-label="Amount spent"
+              aria-describedby="spent in rupee"
+            />
+            <div class="input-group-append">
+              <span class="input-group-text" id="spent in rupee">₹</span>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="spent at">@</span>
+            </div>
+            <input
+              id="inputDesc"
+              type="text"
+              class="form-control"
+              placeholder="spent on"
+              aria-label="spent on"
+              aria-describedby="spent at"
+            />
+            <div class="input-group-append">
+              <button
+                id="button"
+                class="btn btn-outline-primary"
+                type="button"
+                id="button-addon2"
+              >
+                Add
+              </button>
+            </div>
+          </div>
+          <div>
+            <ul class="list-group" id="expenseTable"></ul>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
       const headingel = document.querySelector("#headingtotal");
 
-      const inputdescel = document.querySelector("#inputD");
+      const inputDescel = document.querySelector("#inputDesc");
 
-      const input = document.querySelector("#inputA");
+      const inputElement = document.querySelector("#inputAmount");
 
       const expenseTableEL = document.querySelector("#expenseTable");
 
-      let totalexpense = 0;
+      let totalExpense = 0;
 
-      headingel.textContent = totalexpense;
+      headingel.textContent = totalExpense;
 
-      const allexpenses = [];
+      const allExpenses = [];
 
-      function addexpense() {
-        const expenseitem = {};
+      function addExpenseToTotal() {
+        const expenseItem = {};
 
-        const textamount = input.value;
+        const textAmount = inputElement.value;
 
-        const textdesc = inputdescel.value;
-        console.log({ textdesc, textamount });
+        const textDesc = inputDescel.value;
+        console.log({ textDesc, textAmount });
 
-        const expense = parseInt(textamount, 10);
+        const expense = parseInt(textAmount, 10);
 
-        expenseitem.desc = textdesc;
-        expenseitem.amount = expense;
+        expenseItem.desc = textDesc;
+        expenseItem.amount = expense;
+        expenseItem.moment = new Date();
 
-        allexpenses.push(expenseitem);
+        allExpenses.push(expenseItem);
 
-        totalexpense = totalexpense + expense;
+        totalExpense = totalExpense + expense;
 
-        const sometext = `Total : ${totalexpense}`;
+        //heading element
 
-        headingel.textContent = sometext;
+        const someText = `Total : ${totalExpense}`;
 
-        // const data1 = allexpenses[0];
-        // const data2 = allexpenses[1];
+        headingel.textContent = someText;
 
-        // const data1Text = ` ${data1.amount} :: Desc : ${data1.desc}`;
-        // const data2Text = ` ${data2.amount} :: Desc : ${data2.desc}`;
-
-        // const tableText = `
-        // <div>${data1Text}</div>
-        // <div>${data2Text}</div>
-        // `;
-
-        const allExpenseHTML = allexpenses.map(expense => {
-          return `<div> ${expense.amount} :: ${expense.desc} </div>`;
-        });
-
-        const joinedALLExpenseHTML = allExpenseHTML.join("");
-
-        console.log(joinedALLExpenseHTML);
-
-        expenseTableEL.innerHTML = joinedALLExpenseHTML;
+        renderList(allExpenses);
       }
 
       const element = document.querySelector("#button");
 
-      element.addEventListener("click", addexpense, false);
+      element.addEventListener("click", addExpenseToTotal, false);
+
+      // Delete Item
+      function deleteItem(dateValue) {
+        const newArr = [];
+
+        for (let i = 0; i < allExpenses.length; i++) {
+          if (allExpenses[i].moment.valueOf() !== dateValue) {
+            newArr.push(allExpenses[i]);
+          }
+        }
+
+        // const newArr = allExpenses.filter(expense => expense.amount.valueOf() !== dateValue)
+
+        renderList(newArr);
+      }
+
+      //view layer
+      function renderList(arrOFList) {
+        const allExpenseHTML = arrOFList.map(expense =>
+          createListItem(expense)
+        );
+        const joinedALLExpenseHTML = allExpenseHTML.join("");
+
+        expenseTableEL.innerHTML = joinedALLExpenseHTML;
+      }
+
+      function createListItem({ desc, amount, moment }) {
+        return `
+          <li class="list-group-item d-flex justify-content-between">
+            <div class="d-flex flex-column">
+              ${desc}
+              <small class="text-muted">${moment.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+              })}</small>
+            </div>
+            <div>
+              <span class="px-5">${amount}</span>
+              <button type="button" 
+              class="btn btn-outline-danger btn-sm"
+              onclick="deleteItem(${moment.valueOf()})"
+
+              > 
+              <i class="fas fa-trash-alt">
+              </i>
+              </button>
+            </div>
+          </li>
+          `;
+      }
 
       swal({
         title: "Welcome",
-        text: "This tool is built using VanillaJS",
+        text: "This tool is built using VanillaJS and Bootstrap",
         icon: "success",
         button: "Let's go"
       });
